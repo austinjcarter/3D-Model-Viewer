@@ -13,8 +13,8 @@
 
   <!-- Controls for toggling layers -->
   <div>
-    <button id="toggle-layer1">Toggle Layer 1</button>
-    <button id="toggle-layer2">Toggle Layer 2</button>
+    <button id="toggle-28">Toggle 28</button>
+    <button id="toggle-40">Toggle 40</button>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -33,21 +33,21 @@
     light.position.set(5, 5, 5).normalize();
     scene.add(light);
 
-    // Layer variables
-    var layer1, layer2;
+    // Object variables
+    var object28, object40;
 
     // Load the model using GLTFLoader
     var loader = new THREE.GLTFLoader();
     loader.load('CDS_3D_GPR_Carter.glb', function(gltf) {
       scene.add(gltf.scene);
 
-      // Assign parts of the model to layers
-      layer1 = gltf.scene.getObjectByName("Layer1"); // assuming parts are named 'Layer1'
-      layer2 = gltf.scene.getObjectByName("Layer2");
+      // Access objects by name
+      object28 = gltf.scene.getObjectByName("28");
+      object40 = gltf.scene.getObjectByName("40");
 
-      // Set initial visibility
-      layer1.visible = true;
-      layer2.visible = true;
+      // Set initial visibility (optional)
+      object28.visible = true;
+      object40.visible = true;
 
     }, undefined, function (error) {
       console.error(error);
@@ -62,17 +62,17 @@
     }
     animate();
 
-    // Toggle Layer 1 visibility
-    document.getElementById('toggle-layer1').addEventListener('click', function() {
-      if (layer1) {
-        layer1.visible = !layer1.visible;
+    // Toggle object 28 visibility
+    document.getElementById('toggle-28').addEventListener('click', function() {
+      if (object28) {
+        object28.visible = !object28.visible;
       }
     });
 
-    // Toggle Layer 2 visibility
-    document.getElementById('toggle-layer2').addEventListener('click', function() {
-      if (layer2) {
-        layer2.visible = !layer2.visible;
+    // Toggle object 40 visibility
+    document.getElementById('toggle-40').addEventListener('click', function() {
+      if (object40) {
+        object40.visible = !object40.visible;
       }
     });
 
