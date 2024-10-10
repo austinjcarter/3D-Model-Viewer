@@ -13,7 +13,6 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 
   <script>
     // Basic Three.js setup
@@ -38,14 +37,11 @@
     light.position.set(5, 5, 5).normalize();
     scene.add(light);
 
-    // Load the model using GLTFLoader
-    var loader = new THREE.GLTFLoader();
-    loader.load('CDS_3D_GPR_Carter.glb', function(gltf) {
-      scene.add(gltf.scene);  // Add the loaded model to the scene
-
-    }, undefined, function (error) {
-      console.error('An error occurred while loading the model:', error);
-    });
+    // Add a simple cube to the scene
+    var geometry = new THREE.BoxGeometry();
+    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    var cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
 
     // Render loop
     function animate() {
@@ -55,6 +51,4 @@
     }
     animate();
 
-  </script>
-</body>
-</html>
+  </​⬤
