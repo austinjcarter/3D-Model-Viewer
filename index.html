@@ -34,8 +34,12 @@
 
     // Load the model using GLTFLoader
     var loader = new THREE.GLTFLoader();
-    loader.load('CDS_3D_GPR_Carter.glb', function(gltf) {
+    loader.load('https://threejs.org/examples/models/gltf/DamagedHelmet/glTF/DamagedHelmet.gltf', function(gltf) {
       scene.add(gltf.scene);  // Add the loaded model to the scene
+      gltf.scene.position.set(2, 0, 0);  // Optional: position the model
+    }, undefined, function (error) {
+      console.error('An error occurred while loading the model:', error);
+    });
 
       // Optional: Position the model so it's not overlapping with the cube
       gltf.scene.position.set(2, 0, 0);  // Shift the model 2 units to the right
