@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Model with Layer Control</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- Controls for toggling layers -->
+  <div>
+    <button id="toggle-layer1">Toggle Layer 1</button>
+    <button id="toggle-layer2">Toggle Layer 2</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+  <script>
+    // Basic Three.js setup
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Lighting
+    var light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(5, 5, 5).normalize();
+    scene.add(light);
+
+    // Layer variables
+    var layer1, layer2;
+
+    // Load the model using GLTFLoader
+    var loader = new THREE.GLTFLoader();
+    loader.load('model.glb', function(gltf) {
+      scene.add(gltf.scene);
+
+      // Assign parts of the model to layers
+      layer1 = gltf.scene.getObjectByName("Layer1"); // assuming parts are named 'Layer1'
+      layer2 = gltf.scene.getObjectByName("Layer2");
+
+      // Set initial visibility
+      layer1.visible = true;
+      layer2.visible = true;
+
+    }, undefined, function (error) {
+      console.error(error);
+    });
+
+    camera.position.z = 5;
+
+    // Render loop
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Toggle Layer 1 visibility
+    document.getElementById('toggle-layer1').addEventListener('click', function() {
+      if (layer1) {
+        layer1.visible = !layer1.visible;
+      }
+    });
+
+    // Toggle Layer 2 visibility
+    document.getElementById('toggle-layer2').addEventListener('click', function() {
+      if (layer2) {
+        layer2.visible = !layer2.visible;
+      }
+    });
+
+  </script>
+</body>
+</html>
